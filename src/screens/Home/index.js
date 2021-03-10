@@ -1,11 +1,12 @@
-import { StatusBar, FlatList } from "react-native";
+import { StatusBar, FlatList, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Container, ToolBar, TextToolbar } from "./styles";
+import { Container, ToolBar, TextToolbar, IconSignOut } from "./styles";
 import colors from "../../styles/colors";
 import CardQuestion from "../../components/CardQuestion";
 import { api } from "../../services/api";
+import { signOut } from "../../services/security";
 
-function Home() {
+function Home({ navigation }) {
   StatusBar.setBackgroundColor(colors.primary);
 
   const [isLoadingFeed, setIsLoadingFeed] = useState(false);
@@ -29,6 +30,11 @@ function Home() {
     }
   };
 
+  const handleSignOut = () => {
+    signOut();
+    navigation.navigate("Login");
+  };
+
   useEffect(() => {
     loadQuestions();
   }, []);
@@ -37,14 +43,26 @@ function Home() {
     <Container>
       <ToolBar>
         <TextToolbar>SENAI OVERFLOW</TextToolbar>
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            right: 4,
+            alignSelf: "center",
+          }}
+          onPress={handleSignOut}
+        >
+          <IconSignOut name="sign-out" />
+        </TouchableOpacity>
       </ToolBar>
       <FlatList
         onEndReachedThreshold={0.2}
         onEndReached={() => loadQuestions()}
-        style={{width: "100%"}}
+        style={{ width: "100%" }}
         data={questions}
         keyExtractor={(question) => String(question.id)}
-        renderItem={({item: question}) => <CardQuestion question={question}/>}
+        renderItem={({ item: question }) => (
+          <CardQuestion question={question} />
+        )}
       />
     </Container>
   );

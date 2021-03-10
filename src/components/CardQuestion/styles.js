@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import colors from "../../styles/colors";
-import { TextDefault } from "../../styles/styleGlobas";
+import { TextDefault } from "../../styles/styleGlobal";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 

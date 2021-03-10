@@ -1,8 +1,11 @@
-import styled from "styled-components/native";
-import colors from "../../styles/colors";
 import { StatusBar } from "react-native";
-import { TextDefault } from "../../styles/styleGlobal";
-import Icon from "react-native-vector-icons/FontAwesome";
+import styled from "styled-components/native";
+import colors from "./colors";
+
+export const TextDefault = styled.Text`
+    font-size: 16px;
+    color: ${colors.light};
+`;
 
 export const Container = styled.View`
   flex: 1;
@@ -32,10 +35,4 @@ export const TextToolbar = styled(TextDefault)`
     color: ${colors.dark};
     font-weight: bold;
     text-align: center;
-`;
-
-export const IconSignOut = styled(Icon)`
-  font-size: 25px;
-  color: ${colors.dark};
-  margin-right: 4px;
 `;
